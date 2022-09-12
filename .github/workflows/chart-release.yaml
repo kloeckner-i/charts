@@ -2,7 +2,7 @@ name: Release Charts
 
 on:
   workflow_run:
-    workflows: ["Build and Test"]
+    workflows: ["Test"]
     branches: [main]
     types:
       - completed
