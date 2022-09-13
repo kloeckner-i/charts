@@ -15,13 +15,13 @@ spec:
       labels:
         {{- include "db-operator.labels" . | nindent 8 }}
         {{- if .Values.podLabels }}
-{{ toYaml .Values.podLabels | trim | nindent 8 }}
+        {{ toYaml .Values.podLabels | trim | nindent 8 }}
         {{- end }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
-{{- if .Values.annotations }}
-{{ toYaml .Values.annotations | nindent 8 }}
-{{- end }}
+        {{- if .Values.annotations }}
+        {{ toYaml .Values.annotations | nindent 8 }}
+        {{- end }}
     spec:
       {{- if .Values.serviceAccount.create }}
       serviceAccountName: {{ template "db-operator.name" . }}-sa
@@ -79,13 +79,13 @@ spec:
             name: config-volume
             readOnly: true
           resources:
-{{ toYaml .Values.resources | nindent 12 }}
+            {{ toYaml .Values.resources | nindent 12 }}
       nodeSelector:
-{{ toYaml .Values.nodeSelector | nindent 8 }}
+        {{ toYaml .Values.nodeSelector | nindent 8 }}
       affinity:
-{{ toYaml .Values.affinity  | nindent 8 }}
+        {{ toYaml .Values.affinity  | nindent 8 }}
       tolerations:
-{{ toYaml .Values.tolerations | nindent 8 }}
+        {{ toYaml .Values.tolerations | nindent 8 }}
     {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
     {{- end }}
