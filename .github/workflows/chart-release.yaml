@@ -1,11 +1,14 @@
 name: Release Charts
 
 on:
-  workflow_run:
-    workflows: ["Test"]
-    branches: [main]
-    types:
-      - completed
+  push:
+    branches:
+      - METAL-3701/add_ci
+  # workflow_run:
+  #   workflows: ["Test"]
+  #   branches: [METAL-3701/add_ci]
+  #   types:
+  #     - completed
 
 jobs:
   chart-release:
