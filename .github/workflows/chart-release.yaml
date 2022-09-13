@@ -1,18 +1,18 @@
 name: Release Charts
 
 on:
-  push:
-    branches:
-      - METAL-3701/add_ci
-  # workflow_run:
-  #   workflows: ["Test"]
-  #   branches: [METAL-3701/add_ci]
-  #   types:
-  #     - completed
+  # push:
+  #   branches:
+  #     - METAL-3701/add_ci
+  workflow_run:
+    workflows: ["Test"]
+    branches: [METAL-3701/add_ci]
+    types:
+      - completed
 
 jobs:
   chart-release:
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
