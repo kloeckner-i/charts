@@ -1,4 +1,4 @@
-{{- $selectorLabels := include "db-instances.selectorLabels" .}}
+{{- $selectorLabels := include "db-instances.selectorLabels" . }}
 {{- $operatorNs := include "db-instances.operatorNs" . -}}
 {{- if .Values.dbinstances }}
 {{- range $name, $value := .Values.dbinstances }}
@@ -26,7 +26,7 @@ spec:
   {{- end }}
   {{- if $value.backup }}
   backup:
-{{ toYaml $value.backup | indent 4 }}
+{{ toYaml $value.backup | nindent 4 }}
   {{- end }}
   monitoring:
     enabled: {{ $value.monitoring.enabled }}
@@ -83,7 +83,7 @@ metadata:
     {{- include "db-instances.labels" $ | nindent 4 }}
 data:
   config: |
-{{ $value.google.configMap.data | indent 4 }}
+{{ $value.google.configMap.data | nindent 4 }}
 {{- if $value.google.clientSecret }}
 ---
 apiVersion: v1
@@ -95,7 +95,7 @@ metadata:
     {{- include "db-instances.labels" $ | nindent 4 }}
 data:
   credentials.json: |-
-{{ $value.google.clientSecret | b64enc | indent 4 }}
+{{ $value.google.clientSecret | b64enc | nindent 4 }}
 {{- end }}
 {{- end }}
 {{- end }}

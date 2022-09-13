@@ -1,5 +1,5 @@
 ## Prerequisites
-* Kubernetes v1.14+
+* Kubernetes v1.21+
 * Helm v3.0.2+
 
 ## Releasing new chart version

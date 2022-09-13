@@ -15,12 +15,12 @@ spec:
       labels:
         {{- include "db-operator.labels" . | nindent 8 }}
         {{- if .Values.podLabels }}
-{{ toYaml .Values.podLabels | trim | indent 8 }}
+{{ toYaml .Values.podLabels | trim | nindent 8 }}
         {{- end }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
 {{- if .Values.annotations }}
-{{ toYaml .Values.annotations | indent 8 }}
+{{ toYaml .Values.annotations | nindent 8 }}
 {{- end }}
     spec:
       {{- if .Values.serviceAccount.create }}
@@ -31,7 +31,6 @@ spec:
         runAsUser: {{ .Values.security.runAsUser }}
         fsGroup: {{ .Values.security.fsGroup }}
      {{- end }}
-
       containers:
         - name: operator
           image: "{{ .Values.image.repository }}:{{ template "db-operator.github_packages_image_version" . }}"
@@ -80,19 +79,19 @@ spec:
             name: config-volume
             readOnly: true
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+{{ toYaml .Values.resources | nindent 12 }}
       nodeSelector:
-{{ toYaml .Values.nodeSelector | indent 8 }}
+{{ toYaml .Values.nodeSelector | nindent 8 }}
       affinity:
-{{ toYaml .Values.affinity  | indent 8 }}
+{{ toYaml .Values.affinity  | nindent 8 }}
       tolerations:
-{{ toYaml .Values.tolerations | indent 8 }}
+{{ toYaml .Values.tolerations | nindent 8 }}
     {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
     {{- end }}
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
-{{ toYaml .Values.imagePullSecrets | indent 8 }}
+{{ toYaml .Values.imagePullSecrets | nindent 8 }}
     {{- end }}
       volumes:
       {{- if .Values.secrets.gsql }}
