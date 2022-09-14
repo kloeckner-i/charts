@@ -2,19 +2,22 @@ name: Integration Test
 
 on:
   push:
-    branches:
-      - METAL-3701/add_ci
     paths:
       - 'db-operator/**'
       - 'db-instances/**'
   pull_request:
     branches:
       - main
+  workflow_run:
+    workflows: ["Test"]
+    branches: [METAL-3701/add_ci]
+    types:
+      - completed
 
 jobs:
   db-operator-test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    needs: lint
     strategy:
       matrix:
         k8s_version: ['v1.21.6', 'v1.22.3', 'v1.23.1', 'v1.24.3']
