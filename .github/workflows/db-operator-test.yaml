@@ -8,15 +8,14 @@ on:
   pull_request:
     branches:
       - main
-  workflow_run:
-    workflows: ["Test"]
-    branches: [METAL-3701/add_ci]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["Test"]
+  #   branches: [METAL-3701/add_ci]
+  #   types:
+  #     - completed
 
 jobs:
   db-operator-test:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
