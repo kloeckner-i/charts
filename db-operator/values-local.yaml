@@ -1,9 +1,3 @@
-image:
-  repository: my-db-operator
-  tag: "1.0.0-dev"
-  pullPolicy: IfNotPresent
-
-
 reconcileInterval: "10"
 
 secrets:
