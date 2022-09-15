@@ -17,6 +17,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - id: get-chart
+        name: 'Get modified charts'
+        run: |
+          files_changed="$(git show --pretty="" --name-only)"
+          # Adding || true to avoid "Process exited with code 1" errors
+          charts_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -v ".github" | tr '\n' ' ' || true)"
+          echo "changed:${charts_dirs_changed}"
+          echo "::set-output name=CHANGED_CHARTS::${charts_dirs_changed}"
+
+      - name: Get changed charts
+        run: echo "The selected color is ${{ steps.get-chart.outputs.CHANGED_CHARTS }}"
+
       - uses: actions/setup-python@v2
         with:
           python-version: 3.7
