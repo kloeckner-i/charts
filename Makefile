@@ -15,5 +15,5 @@ lint: ## lint helm manifests
 	@helm lint -f db-operator/values.yaml -f db-operator/ci/ci-1-values.yaml --strict ./db-operator
 	@helm lint -f db-instances/values.yaml --strict ./db-instances
 
-helm: ## install helm if not exist and install local chart using helm upgrade --install command
-	@helm upgrade --install --create-namespace --namespace operator my-dboperator db-operator -f db-operator/values.yaml -f db-operator/values-local.yaml
+db-operator: ## install db-operator chart if not exist and install local chart using helm upgrade --install command
+	@helm upgrade --install --create-namespace --namespace operator my-dboperator charts/db-operator -f charts/db-operator/values.yaml -f charts/db-operator/values-local.yaml
