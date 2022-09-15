@@ -1,12 +1,9 @@
 name: Release Charts
 
 on:
-  # push:
-  #   branches:
-  #     - METAL-3701/add_ci
   workflow_run:
     workflows: ["Test"]
-    branches: [METAL-3701/add_ci]
+    branches: [main]
     types:
       - completed
 
