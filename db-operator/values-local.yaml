@@ -30,4 +30,4 @@ secrets:
             }
 
 serviceMonitor:
-  enabled: true #something change
+  enabled: true #something changed

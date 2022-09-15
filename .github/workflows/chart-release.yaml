@@ -5,7 +5,7 @@ on:
   #   branches:
   #     - METAL-3701/add_ci
   workflow_run:
-    workflows: ["Test", "Integration Test"]
+    workflows: ["Test"]
     branches: [METAL-3701/add_ci]
     types:
       - completed
