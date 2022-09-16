@@ -1,15 +1,6 @@
 # db-operator
 DB Operator is Kubernetes operator
 
-## Configuring helm client
-```
-$ helm repo add kloeckneri https://kloeckner-i.github.io/charts
-```
-Test the helm chart repository
-```
-$ helm search repo kloeckneri/db-operator
-```
-
 ## Installing Chart
 To install the chart with the release name my-release:
 ```

@@ -17,13 +17,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          path: charts
+          fetch-depth: 2 # to be able to obtain files changed in the latest commit
 
       - id: get-chart
         name: 'Get modified charts'
         run: |
           cd charts
-          files_changed="$(git show --pretty="" --name-only)"
+          files_changed="$(git diff --name-only HEAD^ HEAD)"
           # Adding || true to avoid "Process exited with code 1" errors
           charts_dirs_changed="$(echo "$files_changed" | xargs dirname | grep -o "charts/[^/]*" | sed "s|charts/||g" | uniq | tr '\n' ' ' || true)"
           echo "changed:${charts_dirs_changed}"

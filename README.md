@@ -6,3 +6,12 @@
 
 The new chart version release is executed automatically with Github actions.
 For triggering it, change the version of Chart.yaml in the chart directory and merge to `main` branch.
+
+## Configuring helm client
+```
+$ helm repo add kloeckneri https://kloeckner-i.github.io/charts
+```
+Test the helm chart repository
+```
+$ helm search repo kloeckneri
+```
