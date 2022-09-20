@@ -12,8 +12,8 @@ k3d:
 	@kubectl get pod
 
 lint: ## lint helm manifests
-	@helm lint -f db-operator/values.yaml -f db-operator/ci/ci-1-values.yaml --strict ./db-operator
-	@helm lint -f db-instances/values.yaml --strict ./db-instances
+	@helm lint -f charts/db-operator/values.yaml -f charts/db-operator/ci/ci-1-values.yaml --strict ./charts/db-operator
+	@helm lint -f charts/db-instances/values.yaml --strict ./charts/db-instances
 
 db-operator: ## install db-operator chart if not exist and install local chart using helm upgrade --install command
 	@helm upgrade --install --create-namespace --namespace operator my-dboperator charts/db-operator -f charts/db-operator/values.yaml -f charts/db-operator/values-local.yaml
