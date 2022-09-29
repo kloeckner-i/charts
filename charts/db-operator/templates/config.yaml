@@ -26,6 +26,8 @@ data:
         image: {{ .Values.config.backup.postgres.image }}
       mysql:
         image: {{ .Values.config.backup.mysql.image }}
+      resources:
+        {{- toYaml .Values.config.backup.resources | nindent 8 }}
     monitoring:
     {{- if .Values.config.monitoring.promPushGateway }}
       promPushGateway: {{ .Values.config.monitoring.promPushGateway }}

@@ -1,5 +1,8 @@
 reconcileInterval: "10"
 
+image:
+  pullPolicy: IfNotPresent
+
 secrets:
     gsql:
         admin: |
