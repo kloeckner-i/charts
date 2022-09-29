@@ -35,6 +35,7 @@ The following table lists the configurable parameters of the db-operator chart a
 | `config.instance.google.proxy.image` | Container image of db-auth-gateway | `kloeckneri/db-auth-gateway:0.1.7` |
 | `config.instance.google.proxy.nodeSelector` | Node labels for google cloud proxy pod assignment | `{}` |
 | `config.backup.nodeSelector` | Node labels for backup pod assignment | `{}` |
+| `config.backup.resources` | Resource configuration for running backup container same as https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits | `{}` |
 | `config.backup.activeDeadlineSeconds` | activeDeadlineSeconds of backup cronjob | `600` |
 | `config.backup.postgres.image` | Container image of backup cronjob (only for postgres databases) | `kloeckneri/pgdump-gcs:latest` |
 | `config.monitoring.nodeSelector` | Node labels for monitoring pod assignment | `{}` |

@@ -53,6 +53,10 @@ config:
       image: "kloeckneri/pgdump-gcs:latest"
     mysql:
       image: "kloeckneri/mydump-gcs:latest"
+    resources:
+      requests:
+        memory: 64Mi
+        cpu: 0.2
   monitoring:
     promPushGateway: ""
     nodeSelector: {}
