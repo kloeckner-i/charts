@@ -30,6 +30,17 @@ entries:
     version: 1.3.0
   db-operator:
   - apiVersion: v2
+    appVersion: 1.7.0
+    created: "2022-09-29T15:36:36.024118691Z"
+    description: A Database Operator
+    digest: 69fdaaea8e0a02a9841aa7c718c56ebfe329ef6fe1d4d83210d9dbe5d84359c5
+    kubeVersion: '>= 1.21-prerelease'
+    name: db-operator
+    type: application
+    urls:
+    - https://github.com/kloeckner-i/charts/releases/download/db-operator-1.3.0/db-operator-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v2
     appVersion: 1.6.5
     created: "2022-09-16T13:07:31.643021952Z"
     description: A Database Operator
@@ -51,4 +62,4 @@ entries:
     urls:
     - https://github.com/kloeckner-i/charts/releases/download/db-operator-1.2.7/db-operator-1.2.7.tgz
     version: 1.2.7
-generated: "2022-09-21T07:37:50.880493029Z"
+generated: "2022-09-29T15:36:36.024144791Z"
