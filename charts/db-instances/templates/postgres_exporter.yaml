@@ -2,6 +2,7 @@
 {{- $nodeSelector := .Values.nodeSelector }}
 {{- $configSha := include (print $.Template.BasePath "/postgres_exporter_query.yaml") . | sha256sum }}
 {{- $exporter := .Values.exporter.postgres }}
+{{- $fullName := include "db-instances.fullname" . }}
 {{- if .Values.dbinstances }}
 {{- range $name, $value := .Values.dbinstances }}
 {{- if eq $value.engine "postgres" }}
@@ -68,7 +69,7 @@ spec:
   {{- end }}
       - configMap:
           defaultMode: 420
-          name: {{ template "db-instances.fullname" . }}-pgexporter-query
+          name: {{ $fullName }}-pgexporter-query
         name: queries
 {{- if $root.Values.serviceMonitor.enabled }}
 ---

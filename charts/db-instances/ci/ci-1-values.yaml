@@ -1,0 +1,18 @@
+dbinstances:
+  instance1:
+    engine: postgres
+    monitoring:
+      enabled: true
+    secrets:
+      adminUser: admin
+      adminPassword: IamAdmin
+  instance2:
+    engine: mysql
+    monitoring:
+      enabled: true
+    secrets:
+      adminUser: adminUser
+      adminPassword: adminAdmin
+
+serviceMonitor:
+  enabled: true
