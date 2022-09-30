@@ -68,7 +68,7 @@ spec:
   {{- end }}
       - configMap:
           defaultMode: 420
-          name: {{ template "db-instance.fullname" . }}-pgexporter-query
+          name: {{ template "db-instances.fullname" . }}-pgexporter-query
         name: queries
 {{- if $root.Values.serviceMonitor.enabled }}
 ---
