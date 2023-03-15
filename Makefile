@@ -15,5 +15,11 @@ lint: ## lint helm manifests
 	@helm lint -f charts/db-operator/values.yaml -f charts/db-operator/ci/ci-1-values.yaml --strict ./charts/db-operator
 	@helm lint -f charts/db-instances/values.yaml --strict ./charts/db-instances
 
+cert-manager: ## install cert-manager chart if not exist and install local chart using helm upgrade --install command
+	@helm repo add jetstack https://charts.jetstack.io
+	@helm repo update
+	@helm upgrade --install --create-namespace --namespace cert-manager cert-manager jetstack/cert-manager --set installCRDs=true
+
 db-operator: ## install db-operator chart if not exist and install local chart using helm upgrade --install command
 	@helm upgrade --install --create-namespace --namespace operator my-dboperator charts/db-operator -f charts/db-operator/values.yaml -f charts/db-operator/values-local.yaml
+	@kubectl rollout status deploy/db-operator -n operator

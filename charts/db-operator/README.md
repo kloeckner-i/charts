@@ -1,6 +1,26 @@
 # db-operator
 DB Operator is Kubernetes operator
 
+## Upgrading to `v1.10.0`
+CRDs are moved to the `templates` folder, so now they are part of the release. It means that when migration you will get errors about resource ownership. Thow errors will contain messages about missing `labels` and `annotations`, and the easiest way to fix it, will be just to add the `metadata` that helm can't find. So you can follow those messages one by one and when all the `CRDs` are patched, you'll be able to install the release.
+
+For example:
+
+```BASH
+$ helm upgrade my-release .
+Error: UPGRADE FAILED: rendered manifests contain a resource that already exists. Unable to continue with update: CustomResourceDefinition "databases.kci.rocks" in namespace "" exists and cannot be imported into the current release: invalid ownership metadata; label validation error: missing key "app.kubernetes.io/managed-by": must be set to "Helm"; annotation validation error: missing key "meta.helm.sh/release-name": must be set to "my-release"; annotation validation error: missing key "meta.helm.sh/release-namespace": must be set to "default"
+```
+
+So you should add following metadata:
+```YAML
+metadata:
+  labels:
+    "app.kubernetes.io/managed-by": Helm
+  annotations:
+    "meta.helm.sh/release-name": my-release
+    "meta.helm.sh/release-namespace": default
+```
+
 ## Installing Chart
 To install the chart with the release name my-release:
 ```

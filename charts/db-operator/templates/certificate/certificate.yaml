@@ -1,0 +1,15 @@
+{{- if .Values.webhook.certificate.create }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ .Values.webhook.certificate.name }}
+spec:
+  dnsNames:
+  - {{ .Values.webhook.serviceName }}.{{ .Release.Namespace }}.svc
+  - {{ .Values.webhook.serviceName }}.{{ .Release.Namespace }}.svc.cluster.local
+  issuerRef:
+    kind: {{ .Values.webhook.certificate.issuer.kind }}
+    name: {{ .Values.webhook.certificate.issuer.name }}
+  secretName: {{ .Values.webhook.certificate.secretName }}
+{{- end }}

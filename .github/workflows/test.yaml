@@ -15,7 +15,7 @@ jobs:
       changed_charts: ${{ steps.get-chart.outputs.changed_charts }}
     steps: 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: charts
           fetch-depth: 2 # to be able to obtain files changed in the latest commit
@@ -33,16 +33,16 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v3
         with:
           python-version: 3.7
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
         with:
           version: v3.9.4
 
@@ -61,7 +61,7 @@ jobs:
         k8s_version: ['v1.21.6', 'v1.22.3', 'v1.23.1', 'v1.24.3']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       # The existing apparmor profile for mysql needs to be removed.
       # https://github.com/actions/virtual-environments/issues/181
@@ -70,6 +70,7 @@ jobs:
         run: |
           set -x
           sudo apt-get remove mysql-server --purge
+          sudo apt-get update -y
           sudo apt-get install apparmor-profiles
           sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
       
@@ -78,6 +79,9 @@ jobs:
           K8S_VERSION: ${{ matrix.k8s_version }}
         run: make k3d
       
+      - name: Install Cert Manager
+        run: make cert-manager
+
       - name: Install Helm chart
         run: make db-operator
       

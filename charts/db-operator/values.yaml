@@ -18,6 +18,37 @@ rbac:
 serviceAccount:
   create: true
 
+crds:
+  install: true
+  keep: true
+  annotations: {}
+
+webhook:
+  serviceName: db-operator-webhook
+  names:
+    mutating: db-operator-mutating-webhook-configuration
+    validating: db-operator-validating-webhook-configuration
+  certificate:
+    # --------------------------------------------
+    # -- If you want to use an existing
+    # --  secret for CA injection,
+    # --  provide the secret name
+    # --  and set `certificate.create` to `false`
+    # --------------------------------------------
+    create: true
+    name: db-operator-webhook
+    secretName: db-operator-webhook-cert
+    issuer:
+      create: true
+      name: db-operator-issuer
+      # -----------------------------------------
+      # -- If you choose to create a new issuer
+      # -- the `kind` field would be ignored
+      # -- Use it only to reference an existing
+      # -- ClusterIssuer or Issuer
+      # -----------------------------------------
+      kind: Issuer
+
 security: {}
 #  runAsUser: 1000
 #  fsGroup: 1000
