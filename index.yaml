@@ -3,6 +3,15 @@ entries:
   db-instances:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2023-03-15T16:20:07.724717048Z"
+    description: Database Instances for db operator
+    digest: 3ae64023f1fd2d891bad169be1f704164370dd7c52e7ea503484d0bc0d2a68f7
+    name: db-instances
+    urls:
+    - https://github.com/kloeckner-i/charts/releases/download/db-instances-1.4.0/db-instances-1.4.0.tgz
+    version: 1.4.0
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2022-09-30T09:32:00.163092378Z"
     description: Database Instances for db operator
     digest: cebb1eea3d8cc03fae0565f061eddf5e03305c18fe557e633ce679c4b679ebeb
@@ -47,6 +56,17 @@ entries:
     - https://github.com/kloeckner-i/charts/releases/download/db-instances-1.3.0/db-instances-1.3.0.tgz
     version: 1.3.0
   db-operator:
+  - apiVersion: v2
+    appVersion: 1.10.0
+    created: "2023-03-15T16:20:07.89741161Z"
+    description: A Database Operator
+    digest: e13c7754ef89515ca737e24c03a78d08a8ae3939f4677f1cdbc8ea3253cf1533
+    kubeVersion: '>= 1.21-prerelease'
+    name: db-operator
+    type: application
+    urls:
+    - https://github.com/kloeckner-i/charts/releases/download/db-operator-1.7.0/db-operator-1.7.0.tgz
+    version: 1.7.0
   - apiVersion: v2
     appVersion: 1.9.1
     created: "2023-02-17T12:48:11.048315856Z"
@@ -113,4 +133,4 @@ entries:
     urls:
     - https://github.com/kloeckner-i/charts/releases/download/db-operator-1.2.7/db-operator-1.2.7.tgz
     version: 1.2.7
-generated: "2023-02-17T12:48:11.048500361Z"
+generated: "2023-03-15T16:20:07.897460611Z"
