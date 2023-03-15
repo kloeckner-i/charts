@@ -16,9 +16,9 @@ So you should add following metadata:
 metadata:
   labels:
     "app.kubernetes.io/managed-by": Helm
-	annotations:
-	  "meta.helm.sh/release-name": my-release
-	  "meta.helm.sh/release-namespace": default
+  annotations:
+    "meta.helm.sh/release-name": my-release
+    "meta.helm.sh/release-namespace": default
 ```
 
 ## Installing Chart
