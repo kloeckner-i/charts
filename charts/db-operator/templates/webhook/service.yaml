@@ -3,13 +3,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.webhook.serviceName }}
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "webhook.name" . }}
+  labels:
+    {{- include "labels" . | nindent 4 }}
+    app.kubernetes.io/component: "webhook"
 spec:
   ports:
     - port: 443
       protocol: TCP
       targetPort: 9443
   selector:
-    app.kubernetes.io/name: db-operator
+    {{- include "selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: "webhook"
 {{- end }}

@@ -35,7 +35,8 @@ crds:
 
 webhook:
   enabled: true
-  serviceName: db-operator-webhook
+  serviceAccount:
+    create: true
   names:
     mutating: db-operator-mutating-webhook-configuration
     validating: db-operator-validating-webhook-configuration

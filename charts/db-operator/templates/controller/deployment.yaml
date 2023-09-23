@@ -4,27 +4,30 @@ kind: Deployment
 metadata:
   name: {{ template "db-operator.name" . }}
   labels:
-    {{- include "db-operator.labels" . | nindent 4 }}
+    {{- include "labels" . | nindent 4 }}
+    app.kubernetes.io/component: "controller"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "db-operator.selectorLabels" . | nindent 6 }}
+      {{- include "selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: "controller"
   template:
     metadata:
       labels:
-        {{- include "db-operator.labels" . | nindent 8 }}
+        {{- include "labels" . | nindent 8 }}
+        app.kubernetes.io/component: "controller"
         {{- if .Values.podLabels }}
         {{ toYaml .Values.podLabels | trim | nindent 8 }}
         {{- end }}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/controller/config.yaml") . | sha256sum }}
         {{- if .Values.annotations }}
         {{ toYaml .Values.annotations | nindent 8 }}
         {{- end }}
     spec:
       {{- if .Values.serviceAccount.create }}
-      serviceAccountName: {{ template "db-operator.name" . }}-sa
+      serviceAccountName: {{ template "db-operator.serviceAccountName" . }}
       {{- end }}
      {{- if .Values.security }}
       securityContext:
@@ -33,13 +36,10 @@ spec:
      {{- end }}
       containers:
         - name: operator
-          image: "{{ .Values.image.repository }}:{{ template "db-operator.github_packages_image_version" . }}"
+          image: "{{ .Values.image.repository }}:{{ template "github_packages_image_version" . }}"
           ports:
           - containerPort: 60000
             name: metrics
-          - containerPort: 9443
-            name: webhook-server
-            protocol: TCP
           command:
           - db-operator
           {{- if (include "db-operator.args" . ) }}
@@ -87,9 +87,6 @@ spec:
           - mountPath: /run/config/
             name: config-volume
             readOnly: true
-          - mountPath: /tmp/k8s-webhook-server/serving-certs
-            name: cert
-            readOnly: true
           resources:
             {{ toYaml .Values.resources | nindent 12 }}
       nodeSelector:
@@ -121,7 +118,3 @@ spec:
         - name: config-volume
           configMap: 
             name: {{ template "db-operator.name" . }}-config
-        - name: cert
-          secret:
-            defaultMode: 420
-            secretName: {{ .Values.webhook.certificate.secretName }}

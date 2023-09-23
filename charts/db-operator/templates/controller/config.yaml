@@ -3,7 +3,8 @@ kind: ConfigMap
 metadata:
   name: {{ template "db-operator.name" . }}-config
   labels:
-    {{- include "db-operator.labels" . | nindent 4 }}
+    {{- include "labels" . | nindent 4 }}
+    app.kubernetes.io/component: "controller"
 data:
   config.yaml: |
     instance:
