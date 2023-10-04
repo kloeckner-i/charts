@@ -176,3 +176,7 @@ service:
 tests:
   gsql:
     enabled: false
+  mysql:
+    enabled: false
+  postgresql:
+    enabled: false
