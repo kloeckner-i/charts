@@ -59,3 +59,32 @@ in production in any form.
 Or set '.Values.tests.gsql.enabled' to 'false'
 {{- end }}
 
+{{- if .Values.tests.postgres.enabled }}
+-----------------------------------------------------------------------
+You seem to have the postgresql test set to true, usually, 
+it shouldn't be done.
+
+Make sure that you want to run tests, and not using this installation
+in production in any form.
+
+Or set '.Values.tests.postgres.enabled' to 'false'
+
+Also, if you want to test your postgresql installation, you need to 
+provide a postgres server yourself. Test itself doesn't deploy a server
+{{- end }}
+
+{{- if .Values.tests.mysql.enabled }}
+-----------------------------------------------------------------------
+You seem to have the mysql test set to true, usually, 
+it shouldn't be done.
+
+Make sure that you want to run tests, and not using this installation
+in production in any form.
+
+Or set '.Values.tests.mysql.enabled' to 'false'
+
+Also, if you want to test your mysql installation, you need to 
+provide a mysql server yourself. Test itself doesn't deploy a server
+{{- end }}
+
+
