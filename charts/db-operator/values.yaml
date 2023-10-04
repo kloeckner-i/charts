@@ -169,3 +169,10 @@ service:
   annotations: {}
   type: ClusterIP
   port: 8080
+
+# ---------------------------------------------------------------------
+# -- These values are used in tests, they should not affect users
+# ---------------------------------------------------------------------
+tests:
+  gsql:
+    enabled: false
