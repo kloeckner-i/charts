@@ -95,7 +95,7 @@ jobs:
       - name: Init cert-manager server
         if: steps.list-changed.outputs.changed == 'true'
         run: |
-          helmfile -f helm/ci/helmfile.yaml sync
+          helmfile -f charts/db-operator/ci/helmfile.yaml sync
           
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
