@@ -1,3 +1,6 @@
+crds:
+  keep: false
+
 secrets:
   gsql:
     admin: "sa-json"

@@ -1,3 +1,6 @@
+crds:
+  keep: false
+
 image:
   repository: ghcr.io/db-operator/db-operator
   pullPolicy: Always

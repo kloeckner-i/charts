@@ -1,3 +1,6 @@
+crds:
+  keep: false
+
 resources:
   limits:
     cpu: 10m
