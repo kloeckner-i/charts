@@ -1,6 +1,3 @@
-crds:
-  keep: false
-
 image:
   repository: ghcr.io/db-operator/db-operator
   pullPolicy: Always
@@ -20,9 +17,6 @@ resources:
   requests:
     cpu: 10m
     memory: 32Mi
-
-nodeSelector:
-  nodetype: database
 
 annotations:
   some.custom.annotation: "*"
@@ -52,8 +46,6 @@ config:
   instance:
     google:
       proxy:
-        nodeSelector:
-          nodetype: database
         image: ghcr.io/db-operator/db-auth-gateway:latest
         metricsPort: 9090
     generic: {}
@@ -63,16 +55,12 @@ config:
         metricsPort: 9090
   backup:
     activeDeadlineSeconds: 600  # 10m
-    nodeSelector:
-      nodetype: database
     postgres:
       image: "kloeckneri/pgdump-gcs:latest"
     mysql:
       image: "kloeckneri/mydump-gcs:latest"
   monitoring:
     promPushGateway: prometheus-pushgateway.monitoring:9090
-    nodeSelector:
-      nodetype: database
     postgres:
       image: wrouesnel/postgres_exporter:latest
       queries:

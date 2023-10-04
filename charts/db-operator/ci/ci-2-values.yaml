@@ -51,16 +51,12 @@ config:
         metricsPort: 9090
   backup:
     activeDeadlineSeconds: 600  # 10m
-    nodeSelector:
-      nodetype: database
     postgres:
       image: "kloeckneri/pgdump-gcs:latest"
     mysql:
       image: "kloeckneri/mydump-gcs:latest"
   monitoring:
     promPushGateway: prometheus-pushgateway.monitoring:9090
-    nodeSelector:
-      nodetype: database
     postgres:
       image: wrouesnel/postgres_exporter:latest
       queries:
