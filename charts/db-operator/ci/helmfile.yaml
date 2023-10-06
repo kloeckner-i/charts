@@ -1,0 +1,30 @@
+repositories:
+  - name: jetstack
+    url: https://charts.jetstack.io
+  - name: bitnami
+    url: https://charts.bitnami.com/bitnami
+
+releases:
+  - name: cert-manager
+    chart: jetstack/cert-manager
+    namespace: cert-manager
+    createNamespace: true
+    values:
+      - installCRDs: true
+
+  - name: postgres-instance
+    namespace: databases
+    chart: bitnami/postgresql
+    values:
+    - global: 
+        postgresql:
+          auth:
+            postgresPassword: 123123!!
+
+  - name: mysql-instance
+    namespace: databases
+    chart: bitnami/mysql
+    values:
+      - auth:
+          rootPassword: 123123!!
+          password: 123123!!

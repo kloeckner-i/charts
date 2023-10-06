@@ -1,56 +1,27 @@
+crds:
+  keep: false
+
 image:
   repository: ghcr.io/db-operator/db-operator
   pullPolicy: Always
 
 reconcileInterval: "60"
 
-rbac:
-  create: true
+rbac: {}
 
-serviceAccount:
-  create: true
+serviceAccount: {}
 
-resources:
-  limits:
-    cpu: 10m
-    memory: 32Mi
-  requests:
-    cpu: 10m
-    memory: 32Mi
+resources: {}
 
-nodeSelector:
-  nodetype: database
+nodeSelector: {}
 
-annotations:
-  some.custom.annotation: "*"
-
-podLabels:
-  key1: value-one
-  key2: value-two
-
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-        - matchExpressions:
-            - key: kubernetes.io/e2e-az-name
-              operator: In
-              values:
-                - e2e-eu1
-                - e2e-us2
-
-tolerations:
-  - key: "key1"
-    operator: "Equal"
-    value: "value1"
-    effect: "NoSchedule"
+annotations: {}
 
 config:
   instance:
     google:
       proxy:
-        nodeSelector:
-          nodetype: database
+        nodeSelector: {}
         image: ghcr.io/db-operator/db-auth-gateway:latest
         metricsPort: 9090
     generic: {}
@@ -60,16 +31,12 @@ config:
         metricsPort: 9090
   backup:
     activeDeadlineSeconds: 600  # 10m
-    nodeSelector:
-      nodetype: database
     postgres:
       image: "kloeckneri/pgdump-gcs:latest"
     mysql:
       image: "kloeckneri/mydump-gcs:latest"
   monitoring:
     promPushGateway: prometheus-pushgateway.monitoring:9090
-    nodeSelector:
-      nodetype: database
     postgres:
       image: wrouesnel/postgres_exporter:latest
       queries:
@@ -106,32 +73,8 @@ config:
 
 secrets:
   gsql:
-    admin: |
-      {
-        "type": "service_account",
-        "project_id": "test",
-        "private_key_id": "",
-        "private_key": "",
-        "client_email": "",
-        "client_id": "admin",
-        "auth_uri": "",
-        "token_uri": "",
-        "auth_provider_x509_cert_url": "",
-        "client_x509_cert_url": ""
-      }
-    readonly: |
-      {
-        "type": "service_account",
-        "project_id": "integration-project",
-        "private_key_id": "",
-        "private_key": "",
-        "client_email": "",
-        "client_id": "readonly",
-        "auth_uri": "",
-        "token_uri": "",
-        "auth_provider_x509_cert_url": "",
-        "client_x509_cert_url": ""
-      }
+    admin: "sa-json"
+    readonly: "sa-json"
 
 serviceMonitor:
   enabled: false
@@ -155,7 +98,6 @@ relabelings:
     action: replace
 
 service:
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+  annotations: {}
   type: ClusterIP
   port: 8080

@@ -72,7 +72,6 @@ jobs:
         run: |
           cd charts/db-operator
           ./scripts/test_values -p ./ci/unit-test
-
   db-operator-test:
     runs-on: ubuntu-latest
     needs: get-chart
